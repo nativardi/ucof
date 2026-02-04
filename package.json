@@ -2,14 +2,14 @@
   "name": "ucof",
   "version": "1.0.0",
   "description": "Universal Codebase Optimization Framework - CLI Orchestrator",
-  "main": "cli/ucof.js",
+  "main": "ucof.js",
   "bin": {
-    "ucof": "./cli/ucof.js"
+    "ucof": "./ucof.js"
   },
   "scripts": {
-    "start": "node cli/ucof.js",
-    "analyze": "node cli/ucof.js analyze",
-    "fix": "node cli/ucof.js fix"
+    "start": "node ucof.js",
+    "analyze": "node ucof.js analyze",
+    "fix": "node ucof.js fix"
   },
   "keywords": [
     "codebase",

@@ -6,11 +6,44 @@
 
 > 🔍 AI-powered codebase analysis that finds security issues, performance problems, and technical debt in minutes - not days.
 
-**UCOF** is an open-source CLI tool that analyzes any software project using specialized AI agents. Each agent focuses on one domain (security, performance, data, etc.) and uses the most cost-effective AI model for its task.
+**UCOF** is an open-source framework that analyzes any software project using specialized AI agents. Each agent focuses on one domain (security, performance, data, etc.) and uses the most cost-effective AI model for its task.
 
 ---
 
-## 🎯 The Problem
+## ⚡ 30-Second Setup
+
+### Prerequisites
+
+- **Node.js 18+** - [Download here](https://nodejs.org/)
+- **Anthropic API Key** - [Get one here](https://console.anthropic.com/)
+
+### Install
+
+```bash
+# Clone the repo
+git clone https://github.com/nativardi/ucof.git
+cd ucof
+
+# Install and link globally
+npm install && npm link
+
+# Set your API key (add to ~/.zshrc or ~/.bashrc to persist)
+export ANTHROPIC_API_KEY="your-api-key-here"
+```
+
+### Run Your First Analysis
+
+```bash
+# Analyze any project
+ucof analyze /path/to/your/project
+
+# That's it! Check the report:
+cat /path/to/your/project/.optimization/report.md
+```
+
+---
+
+## 🎯 The Problem UCOF Solves
 
 You want to use AI to review your codebase, but:
 
@@ -19,7 +52,7 @@ You want to use AI to review your codebase, but:
 - ❌ No structure means inconsistent, unreliable results
 - ❌ Manual review takes days
 
-## ✅ The Solution
+### ✅ The Solution
 
 UCOF breaks the analysis into **isolated, specialized tasks**:
 
@@ -31,66 +64,43 @@ UCOF breaks the analysis into **isolated, specialized tasks**:
 | ... | ... | ... | ... |
 | **Total** | | **~$0.50** | Full analysis |
 
-Each task runs with **fresh context** - no token waste carrying irrelevant information.
+Each task runs with **fresh context** - no token waste.
 
 ---
 
-## 🚀 Quick Start
+## 📖 Usage
 
-### Installation
-
-```bash
-# Clone the repo
-git clone https://github.com/nativardi/ucof.git
-cd ucof
-
-# Install dependencies
-npm install
-
-# Set your API key
-export ANTHROPIC_API_KEY="your-api-key"
-
-# Make CLI available
-npm link
-```
-
-### Usage
+### CLI Commands
 
 ```bash
-# Analyze any project
-ucof analyze /path/to/your/project
+# Full analysis
+ucof analyze /path/to/project
 
-# View the report
-ucof report /path/to/your/project
+# View existing report
+ucof report /path/to/project
 
-# Start fixing (in a clean session)
-ucof fix /path/to/your/project
+# Start fixing issues (new clean session)
+ucof fix /path/to/project
+
+# Re-analyze with cached discovery (faster)
+ucof analyze /path/to/project --skip-discovery
 ```
 
-### Output
+### Claude Code Integration (Optional)
 
+Want to trigger UCOF from inside Claude Code with `/optimize`?
+
+1. Copy the workflow file to your target project:
+```bash
+mkdir -p /path/to/your/project/.agent/workflows
+cp .agent/workflows/optimize.md /path/to/your/project/.agent/workflows/
 ```
-╔════════════════════════════════════════════════════════════╗
-║                    Analysis Complete                        ║
-╚════════════════════════════════════════════════════════════╝
 
-Health Score: 45/100
-
-Findings by Severity:
-  🔴 Critical: 3
-  🟠 High:     8
-  🟡 Medium:   12
-  🔵 Low:      5
-
-Reports saved to: .optimization/
-  - report.md          (Executive summary)
-  - synthesis.json     (Full analysis)
-  - all-findings.json  (Raw findings)
-```
+2. Open Claude Code in that project and type `/optimize`
 
 ---
 
-## 📊 What It Analyzes
+## 📊 What Gets Analyzed
 
 UCOF runs **8 specialized domain agents**:
 
@@ -104,6 +114,36 @@ UCOF runs **8 specialized domain agents**:
 | 🏗️ **Infrastructure** | CI/CD, Docker, deployment, monitoring | Sonnet |
 | ⚡ **Performance** | Bottlenecks, scaling limits, caching | Sonnet |
 | ✅ **Quality** | Tests, linting, type safety, observability | Sonnet |
+
+---
+
+## 📤 Output
+
+After running `ucof analyze`, you'll find:
+
+```
+your-project/
+└── .optimization/
+    ├── report.md          # Executive summary (human-readable)
+    ├── synthesis.json     # Full analysis with cross-domain patterns
+    └── all-findings.json  # Raw findings from all domains
+```
+
+### Sample Output
+
+```
+╔════════════════════════════════════════════════════════════╗
+║                    Analysis Complete                        ║
+╚════════════════════════════════════════════════════════════╝
+
+Health Score: 45/100
+
+Findings by Severity:
+  🔴 Critical: 3
+  🟠 High:     8
+  🟡 Medium:   12
+  🔵 Low:      5
+```
 
 ---
 
@@ -126,9 +166,6 @@ UCOF runs **8 specialized domain agents**:
 ├─────────────────────────────────────────────────────────────────┤
 │                         Synthesis (Opus)                         │
 │   • Merge findings    • Detect patterns    • Prioritize fixes   │
-├─────────────────────────────────────────────────────────────────┤
-│                           Output                                 │
-│   .optimization/report.md  │  .optimization/synthesis.json      │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -138,68 +175,6 @@ UCOF runs **8 specialized domain agents**:
 2. **Model Routing**: Expensive models only for complex/critical tasks
 3. **Fresh Sessions**: No context carryover = no wasted tokens
 4. **Structured Output**: JSON findings with consistent schema
-
----
-
-## 📁 Project Structure
-
-```
-ucof/
-├── cli/
-│   └── ucof.js              # CLI orchestrator
-├── skills/
-│   ├── orchestrator/        # Main methodology
-│   ├── discovery/           # Tech stack detection
-│   ├── domains/             # Domain-specific analysis
-│   │   ├── security/
-│   │   ├── frontend/
-│   │   ├── backend/
-│   │   ├── data/
-│   │   ├── external/
-│   │   ├── infrastructure/
-│   │   ├── performance/
-│   │   └── quality/
-│   └── synthesis/           # Cross-domain patterns
-├── config/
-│   ├── model-routing.yaml   # Which model for what
-│   ├── severity-rubric.yaml # How to classify issues
-│   └── tech-patterns.yaml   # Technology detection
-├── schemas/
-│   └── finding.json         # Finding structure
-└── templates/
-    └── claude-code-prompt.md # Manual usage prompts
-```
-
----
-
-## 🔧 Configuration
-
-### Model Routing
-
-Edit `config/model-routing.yaml`:
-
-```yaml
-domain_routing:
-  security:
-    default: opus      # Always use best for security
-  frontend:
-    default: sonnet    # Standard analysis
-    override_to_haiku:
-      - condition: "file_count < 20"
-```
-
-### Severity Rules
-
-Edit `config/severity-rubric.yaml`:
-
-```yaml
-severity_levels:
-  critical:
-    criteria:
-      - "Data breach possible"
-      - "Authentication bypass"
-      - "Data loss without recovery"
-```
 
 ---
 
@@ -225,6 +200,48 @@ ucof analyze ./my-startup-app
 ```bash
 # Add to your maintenance routine
 ucof analyze . --skip-discovery  # Use cached tech detection
+```
+
+---
+
+## 🔧 Configuration
+
+### Model Routing
+
+Edit `config/model-routing.yaml`:
+
+```yaml
+domain_routing:
+  security:
+    default: opus      # Always use best for security
+  frontend:
+    default: sonnet    # Standard analysis
+```
+
+### Severity Rules
+
+Edit `config/severity-rubric.yaml`:
+
+```yaml
+severity_levels:
+  critical:
+    criteria:
+      - "Data breach possible"
+      - "Authentication bypass"
+```
+
+---
+
+## 📁 Project Structure
+
+```
+ucof/
+├── ucof.js                 # CLI orchestrator
+├── SKILL.md                # Analysis methodology (for Claude Code)
+├── .agent/workflows/       # Claude Code workflow integration
+│   └── optimize.md
+├── claude-code-prompt.md   # Manual prompts for Claude Code
+└── package.json
 ```
 
 ---
