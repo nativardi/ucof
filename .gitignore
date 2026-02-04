@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+.env.local
+
+# Build
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Project specific
+.optimization/
+*.log

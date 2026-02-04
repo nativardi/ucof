@@ -1,0 +1,35 @@
+{
+  "name": "ucof",
+  "version": "1.0.0",
+  "description": "Universal Codebase Optimization Framework - CLI Orchestrator",
+  "main": "cli/ucof.js",
+  "bin": {
+    "ucof": "./cli/ucof.js"
+  },
+  "scripts": {
+    "start": "node cli/ucof.js",
+    "analyze": "node cli/ucof.js analyze",
+    "fix": "node cli/ucof.js fix"
+  },
+  "keywords": [
+    "codebase",
+    "optimization",
+    "analysis",
+    "security",
+    "performance",
+    "claude",
+    "ai"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  }
+}
