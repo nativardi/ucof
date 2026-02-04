@@ -1,274 +1,234 @@
 # UCOF - Universal Codebase Optimization Framework
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
-[![Claude API](https://img.shields.io/badge/Powered%20by-Claude%20API-blueviolet.svg)](https://anthropic.com)
+[![Claude Code](https://img.shields.io/badge/Works%20with-Claude%20Code-blueviolet.svg)](https://claude.ai)
+[![Node.js](https://img.shields.io/badge/Node.js%20CLI-18+-green.svg)](https://nodejs.org/)
 
-> 🔍 AI-powered codebase analysis that finds security issues, performance problems, and technical debt in minutes - not days.
+> 🔍 **Analyze your codebase in minutes** - Find security issues, performance problems, and technical debt before they hit production.
 
-**UCOF** is an open-source framework that analyzes any software project using specialized AI agents. Each agent focuses on one domain (security, performance, data, etc.) and uses the most cost-effective AI model for its task.
+**Choose your approach:** Use UCOF as a Claude Code Skill (free, no API key) or as a standalone CLI (powerful, cost-optimized).
 
 ---
 
-## ⚡ 30-Second Setup
+## 🚀 Quick Decision Guide
 
-### Prerequisites
+### **What's your situation?**
 
-- **Node.js 18+** - [Download here](https://nodejs.org/)
-- **Anthropic API Key** - [Get one here](https://console.anthropic.com/)
+| Situation | Recommended | Time | Cost |
+|-----------|------------|------|------|
+| "I just want to audit my code now" | **Skill** | 2 min setup | Free |
+| "I need to run this in CI/CD" | **CLI** | 3 min setup | ~$0.50/run |
+| "I want the most powerful analysis" | **CLI** | 3 min setup | ~$0.50/run |
+| "I don't have an API key" | **Skill** | 2 min setup | Free |
+| "I have lots of projects" | **CLI** | 3 min setup | ~$0.50/run |
 
-### Install
+---
+
+## ⚡ Get Started (30 Seconds)
+
+### 🎯 **Option 1: Claude Code Skill (Easiest)**
+
+**Setup: 2 minutes. Cost: Free. API Key: Not needed.**
+
+In Claude Code, paste this:
+
+```
+Read https://raw.githubusercontent.com/nativardi/ucof/main/skill-claude-code/SKILL.md
+Then analyze my project at /path/to/my/project
+```
+
+Done! Claude will fetch the skill and analyze your code.
+
+**Other ways:**
+- Local: `Read ~/.ucof/SKILL.md and analyze /path/to/my/project`
+- Copy-paste: [Full instructions](./skill-claude-code/README.md)
+
+📖 [Skill Version Setup (Full Guide)](./skill-claude-code/README.md)
+
+---
+
+### 🔧 **Option 2: Standalone CLI (Most Powerful)**
+
+**Setup: 3 minutes. Cost: ~$0.50/analysis. API Key: Required.**
 
 ```bash
-# Clone the repo
+# 1. Clone (one time)
 git clone https://github.com/nativardi/ucof.git
-cd ucof
+cd ucof/cli-standalone && npm install
 
-# Install and link globally
-npm install && npm link
+# 2. Get free API key: https://console.anthropic.com/
+export ANTHROPIC_API_KEY="your-key-here"
 
-# Set your API key (add to ~/.zshrc or ~/.bashrc to persist)
-export ANTHROPIC_API_KEY="your-api-key-here"
+# 3. Analyze!
+npm start analyze /path/to/your/project
 ```
 
-### Run Your First Analysis
+Results saved to `.optimization/report.md`
 
-```bash
-# Analyze any project
-ucof analyze /path/to/your/project
-
-# That's it! Check the report:
-cat /path/to/your/project/.optimization/report.md
-```
+📖 [CLI Version Setup (Full Guide)](./cli-standalone/README.md)
 
 ---
 
-## 🎯 The Problem UCOF Solves
+## 📊 Version Comparison
 
-You want to use AI to review your codebase, but:
-
-- ❌ Dumping your entire codebase into ChatGPT hits context limits
-- ❌ Using GPT-4/Opus for everything is expensive (~$3-5 per analysis)
-- ❌ No structure means inconsistent, unreliable results
-- ❌ Manual review takes days
-
-### ✅ The Solution
-
-UCOF breaks the analysis into **isolated, specialized tasks**:
-
-| Step | Model Used | Cost | What It Does |
-|------|------------|------|--------------|
-| Discovery | Haiku (cheap) | ~$0.001 | Detect tech stack, map structure |
-| Security | Opus (smart) | ~$0.15 | Find vulnerabilities, auth issues |
-| Performance | Sonnet (balanced) | ~$0.02 | Identify N+1 queries, bottlenecks |
-| ... | ... | ... | ... |
-| **Total** | | **~$0.50** | Full analysis |
-
-Each task runs with **fresh context** - no token waste.
+| Feature | Skill | CLI |
+|---------|-------|-----|
+| **Setup Time** | 2 min | 3 min |
+| **Cost** | Free 💚 | ~$0.50 |
+| **API Key** | ❌ Not needed | ✅ Required |
+| **Model Selection** | Single | Optimized (Haiku/Sonnet/Opus) |
+| **Speed** | Single session | Parallel domains |
+| **Large Projects** | Context limits | No limits |
+| **CI/CD Automation** | Manual | Full automation |
+| **Best For** | Quick audits | Teams & automation |
 
 ---
 
-## 📖 Usage
+## 🎯 What Both Versions Analyze
 
-### CLI Commands
+Both analyze the same **8 domains**:
 
-```bash
-# Full analysis
-ucof analyze /path/to/project
-
-# View existing report
-ucof report /path/to/project
-
-# Start fixing issues (new clean session)
-ucof fix /path/to/project
-
-# Re-analyze with cached discovery (faster)
-ucof analyze /path/to/project --skip-discovery
-```
-
-### Claude Code Integration (Optional)
-
-Want to trigger UCOF from inside Claude Code with `/optimize`?
-
-1. Copy the workflow file to your target project:
-```bash
-mkdir -p /path/to/your/project/.agent/workflows
-cp .agent/workflows/optimize.md /path/to/your/project/.agent/workflows/
-```
-
-2. Open Claude Code in that project and type `/optimize`
+| Domain | What It Checks |
+|--------|----------------|
+| 🔒 **Security** | Auth bypass, IDOR, secrets, XSS, SQL injection, RLS policies |
+| 🗄️ **Data** | N+1 queries, unbounded queries, missing indexes, schema issues |
+| 🔧 **Backend** | Input validation, error handling, API design, pagination |
+| 🔌 **External** | AI integrations, workers, retry logic, rate limits |
+| 🖥️ **Frontend** | Server vs client components, bundle size, loading states |
+| 🏗️ **Infrastructure** | CI/CD, monitoring, health checks, secrets management |
+| ⚡ **Performance** | Polling, caching, query counts, scaling limits |
+| ✅ **Quality** | Tests, linting, type safety, observability |
 
 ---
 
-## 📊 What Gets Analyzed
-
-UCOF runs **8 specialized domain agents**:
-
-| Domain | What It Checks | Model |
-|--------|----------------|-------|
-| 🔒 **Security** | Auth bypass, IDOR, secrets, XSS, SSRF | Opus |
-| 🔌 **External** | AI integrations, workers, queues, retries | Opus |
-| 🗄️ **Data** | N+1 queries, RLS policies, migrations | Sonnet |
-| 🔧 **Backend** | API design, error handling, validation | Sonnet |
-| 🖥️ **Frontend** | Component architecture, rendering, bundle | Sonnet |
-| 🏗️ **Infrastructure** | CI/CD, Docker, deployment, monitoring | Sonnet |
-| ⚡ **Performance** | Bottlenecks, scaling limits, caching | Sonnet |
-| ✅ **Quality** | Tests, linting, type safety, observability | Sonnet |
-
----
-
-## 📤 Output
-
-After running `ucof analyze`, you'll find:
+## 📋 Sample Output (Both Versions)
 
 ```
-your-project/
-└── .optimization/
-    ├── report.md          # Executive summary (human-readable)
-    ├── synthesis.json     # Full analysis with cross-domain patterns
-    └── all-findings.json  # Raw findings from all domains
-```
+# Analysis Summary
 
-### Sample Output
-
-```
-╔════════════════════════════════════════════════════════════╗
-║                    Analysis Complete                        ║
-╚════════════════════════════════════════════════════════════╝
-
+Project: my-saas-app
 Health Score: 45/100
 
-Findings by Severity:
-  🔴 Critical: 3
-  🟠 High:     8
-  🟡 Medium:   12
-  🔵 Low:      5
+## Findings by Severity
+- 🔴 Critical: 2
+- 🟠 High: 5
+- 🟡 Medium: 8
+- 🔵 Low: 3
+
+## Top Issues to Fix First
+1. SEC-001 - API endpoint lacks authentication [Low effort]
+2. DB-001 - N+1 queries in user listing [Medium effort]
+3. SEC-002 - Hardcoded API key in config [Low effort]
+4. EXT-001 - No retry logic on AI calls [Medium effort]
+
+## Systemic Patterns Detected
+- "No Safety Net": Zero tests, no CI, no monitoring
+- "Happy Path Only": No error handling anywhere
 ```
-
----
-
-## 🏗️ Architecture
-
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                         CLI Orchestrator                         │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                  │
-│   Discovery ──► Security ──► Data ──► Backend ──► ...           │
-│      │              │          │         │                       │
-│      ▼              ▼          ▼         ▼                       │
-│    Haiku         Opus      Sonnet    Sonnet    (Model Routing)  │
-│      │              │          │         │                       │
-│      ▼              ▼          ▼         ▼                       │
-│   Fresh          Fresh      Fresh     Fresh    (Context Reset)   │
-│   Context        Context    Context   Context                    │
-│                                                                  │
-├─────────────────────────────────────────────────────────────────┤
-│                         Synthesis (Opus)                         │
-│   • Merge findings    • Detect patterns    • Prioritize fixes   │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-**Key Design Decisions:**
-
-1. **Isolated Contexts**: Each domain gets only the files it needs
-2. **Model Routing**: Expensive models only for complex/critical tasks
-3. **Fresh Sessions**: No context carryover = no wasted tokens
-4. **Structured Output**: JSON findings with consistent schema
 
 ---
 
 ## 💡 Use Cases
 
-### Pre-Production Audit
-```bash
-ucof analyze ./my-startup-app
-# Get a full security/performance/quality report before launch
+### "I want a quick security audit"
+```
+→ Skill Version (copy-paste, 5 minutes total)
 ```
 
-### CI/CD Integration
-```yaml
-# .github/workflows/audit.yml
-- name: Run UCOF
-  run: |
-    npx ucof analyze .
-    CRITICAL=$(jq '.summary.by_severity.critical' .optimization/synthesis.json)
-    if [ "$CRITICAL" -gt 0 ]; then exit 1; fi
+### "We need automated analysis on every PR"
+```
+→ CLI Version (GitHub Actions integration)
 ```
 
-### Regular Health Checks
-```bash
-# Add to your maintenance routine
-ucof analyze . --skip-discovery  # Use cached tech detection
+### "Which is faster?"
+```
+→ CLI Version (parallel analysis)
+But Skill Version is fast enough for most projects
 ```
 
----
-
-## 🔧 Configuration
-
-### Model Routing
-
-Edit `config/model-routing.yaml`:
-
-```yaml
-domain_routing:
-  security:
-    default: opus      # Always use best for security
-  frontend:
-    default: sonnet    # Standard analysis
+### "Can I try both?"
 ```
-
-### Severity Rules
-
-Edit `config/severity-rubric.yaml`:
-
-```yaml
-severity_levels:
-  critical:
-    criteria:
-      - "Data breach possible"
-      - "Authentication bypass"
+→ Yes! Start with Skill, upgrade to CLI if needed
+No lock-in, both use same methodology
 ```
 
 ---
 
-## 📁 Project Structure
+## ❓ FAQ
 
-```
-ucof/
-├── ucof.js                 # CLI orchestrator
-├── SKILL.md                # Analysis methodology (for Claude Code)
-├── .agent/workflows/       # Claude Code workflow integration
-│   └── optimize.md
-├── claude-code-prompt.md   # Manual prompts for Claude Code
-└── package.json
-```
+### Which should I use?
+**Start with Skill Version** - it's faster to set up, free, and requires no API key. Switch to CLI if you need automation or cost optimization for multiple analyses.
+
+### Do I need anything special?
+**Skill Version:** Claude Code (free) + nothing else
+**CLI Version:** Node.js 18+ (free) + Anthropic API key (~$5 free credits)
+
+### Will this modify my code?
+**No.** Both versions are read-only. They only report findings - you decide what to fix.
+
+### How long does analysis take?
+**Skill Version:** 2-5 minutes (depends on project size)
+**CLI Version:** 1-3 minutes (faster due to parallel processing)
+
+### Does the Skill version cost extra?
+**No.** It uses your existing Claude subscription - no separate charges.
+
+### Can Skill version handle large projects?
+**Yes**, but very large projects may hit Claude's context limits. That's when CLI version shines (no limits).
+
+### What's the cheapest way to analyze 10 projects?
+**Skill Version:** Free (use your Claude subscription)
+**CLI Version:** ~$5 (10 × $0.50)
+
+---
+
+## 📚 Full Documentation
+
+- **[Skill Version Docs](./skill-claude-code/README.md)** - Setup, examples, copy-paste commands
+- **[CLI Version Docs](./cli-standalone/README.md)** - Installation, commands, GitHub Actions integration
+- **[Methodology](./METHODOLOGY.md)** - How analysis works (both versions use this)
+- **[Detailed Comparison](./VERSIONS.md)** - Technical differences explained
+
+---
+
+## 🛠️ Next Steps
+
+1. **Pick your version** (see Quick Decision Guide above)
+2. **Follow the setup** (2-3 minutes)
+3. **Run your first analysis**
+4. **Review findings** in the report
+5. **Fix issues** in priority order (critical → high → medium → low)
 
 ---
 
 ## 🤝 Contributing
 
-Contributions welcome! Areas that need help:
-
-- [ ] More tech stack detection patterns
-- [ ] Additional domain agents
-- [ ] Better report formatting
-- [ ] VS Code extension
-- [ ] GitHub Action
+Ideas for improvements:
+- [ ] More framework-specific checks
+- [ ] Additional domain detections
+- [ ] Industry-specific rules (HIPAA, SOC 2, PCI-DSS)
+- [ ] Better report visualizations
+- [ ] GitHub Action integration
 
 ---
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT - Use freely, modify, distribute
 
 ---
 
-## 🙏 Acknowledgments
+## 🆘 Need Help?
 
-- Built with [Claude API](https://anthropic.com) by Anthropic
-- Inspired by the need for affordable, structured AI code review
+**Skill Version Issues:**
+[See troubleshooting guide](./skill-claude-code/README.md#troubleshooting)
+
+**CLI Version Issues:**
+[See troubleshooting guide](./cli-standalone/README.md#troubleshooting)
+
+**Something else:**
+[Open an issue](https://github.com/nativardi/ucof/issues)
 
 ---
 
-**Star ⭐ this repo if you find it useful!**
+**Made with ❤️ for better code reviews | [Star ⭐ if helpful](https://github.com/nativardi/ucof)**
