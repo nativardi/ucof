@@ -33,15 +33,15 @@
 In Claude Code, paste this:
 
 ```
-Read https://raw.githubusercontent.com/nativardi/ucof/main/skill-claude-code/SKILL.md
+Read https://raw.githubusercontent.com/nativardi/ucof/main/SKILL.md
 Then analyze my project at /path/to/my/project
 ```
 
 Done! Claude will fetch the skill and analyze your code.
 
 **Other ways:**
-- Local: `Read ~/.ucof/SKILL.md and analyze /path/to/my/project`
-- Copy-paste: [Full instructions](./skill-claude-code/README.md)
+- Local: `Read ~/ucof/SKILL.md and analyze /path/to/my/project`
+- Copy-paste: [Full instructions](./SKILL.md)
 
 📖 [Skill Version Setup (Full Guide)](./skill-claude-code/README.md)
 

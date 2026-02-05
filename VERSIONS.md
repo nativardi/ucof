@@ -286,7 +286,7 @@ Can handle:
 
 ```
 # In Claude Code, simple one-liner:
-"Read https://raw.githubusercontent.com/nativardi/ucof/main/skill-claude-code/SKILL.md
+"Read https://raw.githubusercontent.com/nativardi/ucof/main/SKILL.md
 and analyze /path/to/my/project"
 
 # Can also do:
@@ -321,7 +321,7 @@ if ucof analyze . | grep -q "critical"; then exit 1; fi
 ✅ Can work offline!
 
 Option 1: Clone locally
-- git clone https://github.com/nativardi/ucof.git ~/.ucof
+- git clone https://github.com/nativardi/ucof.git ~/ucof
 - Claude Code can read local files
 - No internet needed after setup
 
@@ -445,7 +445,7 @@ More powerful:
 
 ```
 # 1. In Claude Code, paste:
-"Read ~/.ucof/skill-claude-code/SKILL.md
+"Read ~/ucof/SKILL.md
 and analyze /path/to/my/project"
 
 # 2. Results in Claude's response instead of file
