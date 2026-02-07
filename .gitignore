@@ -129,3 +129,15 @@ env/
 .local/
 .env.local.backup
 *.env.local
+
+# ============================================================================
+# PERSONAL NOTES & SELF-DOCUMENTATION (NEVER COMMIT)
+# ============================================================================
+NOTES.md
+PRIVATE.md
+TODO-PERSONAL.md
+DECISIONS.md
+*-PRIVATE.md
+notes/
+.notes/
+personal/

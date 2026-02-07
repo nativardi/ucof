@@ -1,23 +1,26 @@
 # UCOF Quick Start Guide
 
-> **Get started analyzing your codebase in 2-3 minutes**
+> **Analyze your codebase in 3-5 minutes with parallel AI agents**
 
 ---
 
 ## 🎯 Choose Your Path
 
-### Path A: I Just Want to Analyze Something (Right Now)
+### Path A: Instant Analysis (Recommended)
 
-```bash
-# 1. Open Claude Code
-# 2. Paste this ONE line:
+**In Claude Code, paste this ONE line:**
 
-Read https://raw.githubusercontent.com/nativardi/ucof/main/skill-claude-code/SKILL.md and analyze /path/to/my/project
-
-# That's it! Wait 3-5 minutes for results.
+```
+Read https://raw.githubusercontent.com/nativardi/ucof/main/SKILL.md and analyze /path/to/my/project
 ```
 
-**Time:** 2 minutes setup + 5 minutes analysis = **7 minutes total** ✅
+**What happens:**
+- ✅ Parallel analysis across 8 domains (Security, Data, Backend, External, Frontend, Infrastructure, Performance, Quality)
+- ✅ Intelligent model routing (Haiku for discovery, Sonnet for standard, Opus for critical)
+- ✅ Complete report with prioritized findings in 3-5 minutes
+- ✅ Free (uses your Claude subscription)
+
+**Total time:** 30 seconds setup + 3-5 minutes analysis = **< 6 minutes** ✅
 
 ---
 

@@ -1,6 +1,13 @@
 # UCOF Skill Version - Claude Code Setup
 
-> **No API key needed. No installation. Just copy-paste.**
+> **Advanced parallel analysis with intelligent model routing. No API key needed.**
+
+## ✨ What's New
+
+- ✅ **Parallel analysis** - Analyzes 8 domains simultaneously (3-5 min total)
+- ✅ **Model optimization** - Haiku for discovery, Sonnet for standard, Opus for critical
+- ✅ **Systemic pattern detection** - Identifies cross-domain issues
+- ✅ **Prioritized execution plan** - Phase 0 (immediate) through Phase 3 (backlog)
 
 ---
 
@@ -8,17 +15,21 @@
 
 ### Method 1: GitHub URL (Easiest, Recommended)
 
-In Claude Code, just say:
+In Claude Code, paste this:
 
 ```
-Read https://raw.githubusercontent.com/nativardi/ucof/main/skill-claude-code/SKILL.md
+Read https://raw.githubusercontent.com/nativardi/ucof/main/SKILL.md
 Then analyze my project at /path/to/my/project
 ```
 
-Claude will:
-1. Fetch the skill
-2. Analyze your project
-3. Return findings with severity, evidence, and fixes
+**What happens automatically:**
+1. **Discovery** (Haiku) - Maps tech stack
+2. **Security & External** (Opus) - Critical domain analysis
+3. **Data, Backend, Frontend, Infrastructure, Performance, Quality** (Sonnet) - Parallel analysis
+4. **Synthesis** (Opus) - Cross-domain patterns
+5. **Report** - Prioritized findings with execution plan
+
+**Time:** 3-5 minutes total
 
 **Advantage:** Always uses the latest version. One-liner.
 

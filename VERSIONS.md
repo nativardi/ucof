@@ -13,14 +13,14 @@
 | **Cost per Run** | Free | ~$0.50 |
 | **Installation** | None | npm install |
 | **Access** | GitHub URL or copy-paste | Terminal command |
-| **Model Selection** | Single (Haiku) | Optimized routing |
-| **Analysis Speed** | Single session | Parallel domains |
+| **Model Selection** | ✅ Optimized (Haiku/Sonnet/Opus) | ✅ Optimized (Haiku/Sonnet/Opus) |
+| **Parallel Analysis** | ✅ Yes (3-5 min) | ✅ Yes (1-3 min) |
 | **Large Projects** | Context limits | No limits |
-| **CI/CD Ready** | ❌ No | ✅ Yes |
+| **CI/CD Ready** | Scriptable | ✅ Full automation |
 | **Automation** | Manual | Full support |
 | **Team Usage** | Per-person | Shared config |
-| **Offline Mode** | Local file | No |
-| **Best For** | Quick audits | Automation |
+| **Offline Mode** | ✅ Local clone | ❌ No |
+| **Best For** | Quick audits, individual devs | Teams, automation, large projects |
 
 ---
 
@@ -84,40 +84,43 @@
 
 #### Skill Version
 ```
-Single model (Haiku - cost-effective):
-- Consistent speed
-- Good for most projects
-- Smaller context window (~200K tokens)
+Intelligent routing (optimized):
+- Discovery: Haiku (fast mapping)
+- Security & External: Opus (critical domains)
+- Data/Backend/Frontend/Infrastructure/Performance/Quality: Sonnet
+- Synthesis: Opus (cross-domain pattern detection)
 
 ✅ Pros:
-- Predictable
-- Good enough for 90% of projects
+- Automatic model optimization
+- Free (uses Claude subscription)
+- No API key needed
+- Same intelligence as CLI
 
 ❌ Cons:
-- Can't use smarter models for complex analysis
-- Large projects may hit limits
+- Uses Claude Code quota
+- Large projects may hit context limits
 ```
 
 #### CLI Version
 ```
-Intelligent routing:
+Intelligent routing (identical to Skill):
 - Discovery: Haiku (cheap, fast)
-- Security: Opus (most powerful)
-- Data/Backend/Frontend/Quality: Sonnet
+- Security & External: Opus (critical)
+- Data/Backend/Frontend/Infrastructure/Performance/Quality: Sonnet
 - Synthesis: Opus (cross-domain pattern detection)
 
 ✅ Pros:
-- Uses best model for each task
-- Larger context window per task (~200K each)
-- Faster analysis (parallel domains)
-- Better cross-domain pattern detection
+- Same model intelligence as Skill
+- Independent context per domain (no limits)
+- Can run in CI/CD
+- Predictable costs
 
 ❌ Cons:
 - Costs ~$0.50 per analysis
 - Requires API key
 ```
 
-**Winner:** CLI (more powerful), but Skill is "good enough"
+**Winner:** Tie for intelligence, Skill wins on cost, CLI wins on scale
 
 ---
 
@@ -125,20 +128,22 @@ Intelligent routing:
 
 #### Skill Version
 ```
-Single session: 2-5 minutes total
+Parallel analysis: 3-5 minutes total
 
 Flow:
-1. Discovery
-2. All 8 domains (sequentially)
-3. Synthesis
-4. Report
+1. Discovery (Haiku - fast)
+2. Batch 1 (parallel): Security + External (Opus)
+3. Batch 2 (parallel): Data + Backend (Sonnet)
+4. Batch 3 (parallel): Frontend + Infrastructure + Performance + Quality (Sonnet)
+5. Synthesis (Opus)
+6. Report
 
 ⏰ Typical timeline:
-- Small project: 2 min
-- Medium project: 3-4 min
-- Large project: 5+ min
+- Small project: 3 min
+- Medium project: 4 min
+- Large project: 5 min
 
-Bottleneck: Single context, sequential processing
+Speedup: Parallel domains within Claude Code session
 ```
 
 #### CLI Version
@@ -146,21 +151,20 @@ Bottleneck: Single context, sequential processing
 Parallel analysis: 1-3 minutes total
 
 Flow:
-1. Discovery (fast, Haiku)
-2. Domains 1-4 (parallel: Security, External, Data, Backend)
-3. Domains 5-8 (parallel: Frontend, Infrastructure, Performance, Quality)
-4. Synthesis (Opus cross-domain analysis)
-5. Report
+1. Discovery (Haiku)
+2. All domains in parallel (Security/External=Opus, others=Sonnet)
+3. Synthesis (Opus)
+4. Report
 
 ⏰ Typical timeline:
 - Small project: 1 min
 - Medium project: 2 min
 - Large project: 3 min
 
-Speedup: Parallel + optimized models
+Speedup: Full parallel + independent API calls
 ```
 
-**Winner:** CLI (faster, especially large projects)
+**Winner:** CLI (slightly faster due to fully independent parallel execution)
 
 ---
 

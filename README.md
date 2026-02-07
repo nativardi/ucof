@@ -30,6 +30,8 @@
 
 **Setup: 2 minutes. Cost: Free. API Key: Not needed.**
 
+**Features:** Parallel analysis across 8 domains, intelligent model routing (Haiku/Sonnet/Opus), 3-5 minute analysis time.
+
 In Claude Code, paste this:
 
 ```
@@ -37,7 +39,11 @@ Read https://raw.githubusercontent.com/nativardi/ucof/main/SKILL.md
 Then analyze my project at /path/to/my/project
 ```
 
-Done! Claude will fetch the skill and analyze your code.
+Done! Claude will automatically:
+- Map your tech stack (Haiku)
+- Analyze security & external services (Opus)
+- Check data, backend, frontend (Sonnet)
+- Synthesize findings & create execution plan (Opus)
 
 **Other ways:**
 - Local: `Read ~/ucof/SKILL.md and analyze /path/to/my/project`
@@ -76,11 +82,11 @@ Results saved to `.optimization/report.md`
 | **Setup Time** | 2 min | 3 min |
 | **Cost** | Free 💚 | ~$0.50 |
 | **API Key** | ❌ Not needed | ✅ Required |
-| **Model Selection** | Single | Optimized (Haiku/Sonnet/Opus) |
-| **Speed** | Single session | Parallel domains |
+| **Model Selection** | ✅ Optimized (Haiku/Sonnet/Opus) | ✅ Optimized (Haiku/Sonnet/Opus) |
+| **Parallel Analysis** | ✅ Yes | ✅ Yes |
 | **Large Projects** | Context limits | No limits |
-| **CI/CD Automation** | Manual | Full automation |
-| **Best For** | Quick audits | Teams & automation |
+| **CI/CD Integration** | Scriptable | Full automation |
+| **Best For** | Quick audits, individual use | Teams, automation, large projects |
 
 ---
 
@@ -179,6 +185,25 @@ No lock-in, both use same methodology
 ### What's the cheapest way to analyze 10 projects?
 **Skill Version:** Free (use your Claude subscription)
 **CLI Version:** ~$5 (10 × $0.50)
+
+### Can I use CLI in CI/CD pipelines?
+**Yes**, but consider these factors:
+
+**Cost:**
+- ~$0.50 per analysis
+- 100 PRs/week = $50/week = $200/month
+
+**Speed:**
+- Adds 1-3 minutes to CI pipeline
+
+**Best Practices:**
+- ✅ Run on main branch only (not every PR)
+- ✅ Scheduled weekly/monthly audits
+- ✅ Pre-release health checks
+- ✅ Manual workflow triggers
+- ❌ Not ideal for every PR on high-traffic repos
+
+**Example:** Configure GitHub Actions to run only on pushes to `main` or as manual workflow dispatch.
 
 ---
 
